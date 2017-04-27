@@ -6,7 +6,7 @@ from tornado import options
 class MainHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
-        self.render("index.html")
+        self.render("socket.html")
 #         self.write('''
 # <script>
 # ws = new WebSocket("ws://localhost:9999/ws");
