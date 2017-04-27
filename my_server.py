@@ -7,17 +7,34 @@ class MainHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     def get(self):
         self.render("index.html")
+#         self.write('''
+# <script>
+# ws = new WebSocket("ws://localhost:9999/ws");
+# ws.onmessage = function(e) {
+#     alert('message received: ' + e.data);
+# };
+# </script>''')
 
 class WebSocket(tornado.websocket.WebSocketHandler):
+
+    waiters = set()
+
     def open(self):
         print("open websocket connection")
         self.write_message("The server says: 'Hello'. Connection was accepted.")
+        self.waiters.add(self)
 
     def on_message(self, message):
         print(message)
+        for waiter in self.waiters:
+            if waiter == self:
+                waiter.write_message("ok, received your message!!")
 
     def on_close(self):
         print("close websocket connection")
+
+    def check_origin(self, origin):
+        return True
 
 app = tornado.web.Application([
     (r"/", MainHandler),
