@@ -115,28 +115,35 @@
           }
           ?></h2>
           <!-- HomeContent -->
-          <div class="row" style="margin-top:20px;padding-right:20px;<?php if($page != "home"){ print("display:none;"); }?>">
-            <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-              <a href="?page=home" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">ホーム</a>
-            </div>
-            <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-              <a href="?page=regist" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">登録</a>
-            </div>
-            <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-              <a href="?page=change" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">変更</a>
-            </div>
-            <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-              <a href="?page=use" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">工房利用</a>
+          <div style="<?php if($page != "home"){ print("display:none;"); }?>">
+            <p>一覧</p>
+            <div class="row" style="margin-top:20px;padding-right:20px;">
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
+                <a href="?page=home" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">ホーム</a>
+              </div>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
+                <a href="?page=regist" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">登録</a>
+              </div>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
+                <a href="?page=change" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">変更</a>
+              </div>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
+                <a href="?page=use" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">工房利用</a>
+              </div>
             </div>
           </div>
           <!-- HomeContent End -->
           <!-- RegistContent -->
-          <div class="row" style="margin-top:20px;padding-left:10px;<?php if($page != "regist"){ print("display:none;"); }?>">
-            <div class="alert alert-info alert-dismissible col-md-10  col-sm-10" role="alert">
+          <div class="row" style="margin-top:20px;padding-left:10px;<?php if($page != "regist" && $page != "change"){ print("display:none;"); }?>margin-bottom:20px;">
+            <div class="alert alert-info alert-dismissible col-md-10  col-sm-10" role="alert" style="display:none;" id="alert_connecting">
               <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>info!</strong> this is test
+              <strong>info:</strong> サーバとの通信を確立しています。しばらくお待ちください。
             </div>
-            <form class="col-md-9  col-sm-9" style="border:solid 1px #c9c9c9;border-radius:6px;padding:20px;" onsubmit="return false;">
+            <div class="alert alert-dismissible col-md-10  col-sm-10" role="alert" style="display:none;" id="alert_res">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <strong>Success!</strong> カードリーダーの準備ができました！
+            </div>
+            <form class="col-md-9  col-sm-10" style="border:solid 1px #c9c9c9;border-radius:6px;padding:20px;display:none;" onsubmit="return false;" id="regist_form">
               <div class="form-group">
                 <label for="InputUserName">氏名</label>
                 <input type="email" class="form-control" id="user_name" placeholder="User name" style="width:30%;" maxlength="15">
@@ -155,10 +162,29 @@
                 <label for="InputEmail">eメールアドレス</label>
                 <input type="email" class="form-control" id="email" placeholder="Email address" style="width:50%;" maxlength="35">
               </div>
-              <button type="submit" class="btn btn-default" style="margin:10px 0;">Submit</button>
+              <button type="submit" class="btn btn-default" style="margin:10px 0;">確認</button>
             </form>
           </div>
           <!-- RegistContent End -->
+          <!-- UseContent -->
+          <div style="<?php if($page != "use"){ print("display:none;"); }?>">
+            <p>利用目的をクリックしてください</p>
+            <div class="row" style="margin-top:20px;padding-right:20px;">
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
+                <a href="#" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">授業利用</a>
+              </div>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
+                <a href="#" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">サークル利用</a>
+              </div>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
+                <a href="#" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">研究利用</a>
+              </div>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
+                <a href="#" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">その他</a>
+              </div>
+            </div>
+          </div>
+          <!-- UseContent End -->
         </div>
       </div>
     </div>
@@ -207,8 +233,8 @@
   <script type="text/javascript" src="js/moment.min.js"></script>
   <script type="text/javascript" src="js/fullcalendar.min.js"></script> -->
   <?php
-    if($page == "regist"){
-      //print("<script type='text/javascript' src='assets/scripts/socket.js'></script>");
+    if( $page == "regist" || $page == "change" ){
+      print("<script type='text/javascript' src='assets/scripts/socket.js'></script>");
     }
   ?>
 </body>

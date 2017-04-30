@@ -1,3 +1,4 @@
+import json
 import tornado.ioloop
 import tornado.web
 import tornado.websocket
@@ -21,14 +22,18 @@ class WebSocket(tornado.websocket.WebSocketHandler):
 
     def open(self):
         print("open websocket connection")
-        self.write_message("The server says: 'Hello'. Connection was accepted.")
+        #self.write_message("")
         self.waiters.add(self)
 
     def on_message(self, message):
         print(message)
+        page_data = json.loads(message)
+        res_data = {"data":page_data["page"]}
+        res_data["status"] = "ok"
+        print(res_data)
         for waiter in self.waiters:
             if waiter == self:
-                waiter.write_message("ok, received your message!!")
+                waiter.write_message(json.dumps(res_data))
 
     def on_close(self):
         print("close websocket connection")

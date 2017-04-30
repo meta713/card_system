@@ -1,9 +1,4 @@
-$(function(){
-  //$("#btn-login").on("click",inputcheck);
-});
-
 //var id_timeout = "";
-
 function inputcheck(){
   // console.log("gaj");
   // make_alert("this is test",$(".panel-body"));

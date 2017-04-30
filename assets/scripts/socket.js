@@ -1,29 +1,44 @@
 $(function(){
-  var host = "ws://localhost:9999/ws";
-  var socket = new WebSocket(host);
-  if(socket){
+  var page_info = getUrlVars(location.search);
+  if( page_info["page"] == "regist" || page_info["page"] == "change" ){
+    $("#alert_connecting").show("normal");
+    setTimeout(function(){
+      var host = "ws://localhost:9999/ws";
+      var socket = new WebSocket(host);
+      if(socket){
 
-     socket.onopen = function(){
-       console.log("success!!");
-       console.log(JSON.stringify(getUrlVars(location.search)));
-       ///getUrlVars(location.search)
-       //JSON.stringify()
-       socket.send(JSON.stringify(getUrlVars(location.search)));
-     }
+         socket.onopen = function(){
+           console.log("success!!");
+           console.log(JSON.stringify(getUrlVars(location.search)));
+           ///getUrlVars(location.search)
+           //JSON.stringify()
+           socket.send(JSON.stringify(getUrlVars(location.search)));
+         }
 
-     socket.onmessage = function(msg){
-       //showServerResponse(msg.data);
-       console.log(msg);
-     }
+         socket.onmessage = function(msg){
+           //showServerResponse(msg.data);
+           console.log(msg);
+           setTimeout(function(){
+             $("#alert_connecting").hide("slow");
+             try {
+               res_data = JSON.parse(msg.data);
+               $("#alert_res").addClass("alert-success").show("normal");
+               $("#alert_res").find()
+             } catch (e) {
+             }
+           },1000);
+         }
 
-     socket.onclose = function(){
-       //alert("connection closed....");
-       //showServerResponse("The connection has been closed.");
-     }
+         socket.onclose = function(){
+           //alert("connection closed....");
+           //showServerResponse("The connection has been closed.");
+         }
 
-   }else{
-     console.log("invalid socket");
-   }
+       }else{
+         console.log("invalid socket");
+       }
+    },700);
+  }
 })
 
 /**
