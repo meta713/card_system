@@ -1,0 +1,136 @@
+.box1 {
+  background-color: #000;
+  color:#fff;
+}
+
+.box2 {
+  background-color: #816945;
+  color: #c50030;
+}
+
+.box3 {
+  background-color: #33476a;
+  color: #44aeea;
+}
+
+.box4 {
+  background-color: #a0c238;
+  color: #7d0f80;
+}
+@media (max-width:599px) {
+
+.box1 {
+  height:25%;
+  width:100%
+}
+
+.box2 {
+  height:25%;
+  width:100%;
+}
+
+.box3 {
+  height:25%;
+  width:100%;
+}
+
+.box4 {
+  height:25%;
+  width:100%;
+}
+
+}
+
+@media (min-width:600px){
+
+.box1 {
+  height:20%;
+  width:100%;
+}
+
+}
+
+@media (min-width:600px) and (max-width:767px) {
+
+.boxB {
+  content:"";
+  display:block;
+  clear:both;
+  height:40%;
+  width:100%;
+}
+
+.box2{
+  float:right;
+  width:75%;
+  height:100%;
+}
+
+.box3{
+  float:left;
+  width:25%;
+  height:100%;
+}
+
+.box4{
+  width:100%;
+  height:40%;
+}
+
+}
+
+@media (min-width:768px) {
+
+.boxA {
+  content:"";
+  display:block;
+  clear:both;
+  height:80%;
+}
+
+.boxB{
+  float:left;
+  width:80%;
+}
+
+
+.box4{
+  float:left;
+  width:20%;
+  height:100%;
+}
+
+.boxB{
+  content:"";
+  display:block;
+  clear:both;
+  height:100%;
+}
+
+.box2{
+  float:right;
+  width:75%;
+  height:100%;
+}
+
+.box3{
+  float:left;
+  width:25%;
+  height:100%;
+}
+
+}
+
+.box-hover {
+  background-color: #ff0000;
+}
+
+.button:hover{
+  background-color: #ff0;
+}
+.no{
+  display: none;
+}
+.yes{
+  display: block;
+}
