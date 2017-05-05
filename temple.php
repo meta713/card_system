@@ -134,19 +134,11 @@
           </div>
           <!-- HomeContent End -->
           <!-- RegistContent -->
-          <div class="row" style="margin-top:20px;padding-left:10px;<?php if($page != "regist" && $page != "change"){ print("display:none;"); }?>margin-bottom:20px;">
-            <div class="alert alert-info alert-dismissible col-md-10  col-sm-10" role="alert" style="display:none;" id="alert_connecting">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>info:</strong> サーバとの通信を確立しています。しばらくお待ちください。
-            </div>
-            <div class="alert alert-dismissible col-md-10  col-sm-10" role="alert" style="display:none;" id="alert_res">
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <strong>Success!</strong> カードリーダーの準備ができました！
-            </div>
-            <form class="col-md-9  col-sm-10" style="border:solid 1px #c9c9c9;border-radius:6px;padding:20px;display:none;" onsubmit="return false;" id="regist_form">
+          <div class="row" style="margin-top:20px;padding-left:20px;<?php if($page != "regist" && $page != "change"){ print("display:none;"); }?>margin-bottom:20px;">
+            <form class="col-md-8  col-sm-8" style="border:solid 1px #c9c9c9;border-radius:6px;padding:20px;display:none;" onsubmit="return false;" id="regist_form">
               <div class="form-group">
                 <label for="InputUserName">氏名</label>
-                <input type="email" class="form-control" id="user_name" placeholder="User name" style="width:30%;" maxlength="15">
+                <input type="text" class="form-control" id="user_name" placeholder="User name" style="width:30%;" maxlength="15">
               </div>
               <div class="form-group">
                 <label for="InputStudentNumber">学籍番号</label>
@@ -155,15 +147,43 @@
               </div>
               <div class="form-group">
                 <label for="InputPhoneNumber">電話番号</label>
-                <input type="text" class="form-control" id="phone_number" placeholder="Phone number" style="width:30%;" maxlength="15">
+                <input type="text" class="form-control" id="phone_number" placeholder="Phone number" style="width:40%;" maxlength="15">
                 <p class="help-block" style="font-size:12px;">（左ヅメ、ハイフンなし）</p>
               </div>
               <div class="form-group">
                 <label for="InputEmail">eメールアドレス</label>
-                <input type="email" class="form-control" id="email" placeholder="Email address" style="width:50%;" maxlength="35">
+                <input type="email" class="form-control" id="email" placeholder="Email address" style="width:70%;" maxlength="35">
               </div>
-              <button type="submit" class="btn btn-default" style="margin:10px 0;">確認</button>
+              <button type="submit" class="btn btn-default" style="margin:10px 0;" id="submit_btn">確認</button>
+              <div id="error_area" style="margin-top:10px;">
+              </div>
             </form>
+            <div class="col-md-3 col-sm-3" style="position:fixed;top:24%;right:0px;" id="alert_area">
+              <div class="alert alert-info alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="alert_connecting">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>info :</strong> サーバとの通信を確立しています。しばらくお待ちください。
+              </div>
+              <div class="alert alert-success alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="alert_ready">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Success! :</strong> カードリーダーの準備ができました！ カードをタッチしてください。
+              </div>
+              <div class="alert alert-danger alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="alert_fail">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning! :</strong> サーバとの接続に失敗しました。
+              </div>
+              <div class="alert alert-danger alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="alert_timeout">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Warning! :</strong> タイムアウトです、もう一度最初からお願いします。
+              </div>
+              <div class="alert alert-success alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="alert_ok">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Done! :</strong> カードを確認しました！ 情報を登録してください！
+              </div>
+              <div class="alert alert-warning alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="cancel_btn">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>delete! :</strong> 全てのログを削除します。
+              </div>
+            </div>
           </div>
           <!-- RegistContent End -->
           <!-- UseContent -->
@@ -219,7 +239,7 @@
   <script src="bootstrap/js/jquery.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  <script src="assets/scripts/jquery.easing.min.js"></script>
 
   <!-- Bootstrap Core JavaScript -->
   <script src="bootstrap/js/bootstrap.min.js"></script>
