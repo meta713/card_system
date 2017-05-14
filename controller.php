@@ -4,8 +4,8 @@
 $input_username = htmlspecialchars($_POST["username"]);
 $input_password = htmlspecialchars($_POST["password"]);
 
-$ds_username = "";
-$ds_password = "";
+$ds_username = "design";
+$ds_password = "ds_master";
 
 $array = array();
 

@@ -132,16 +132,16 @@
             <p>一覧</p>
             <div class="row" style="margin-top:20px;padding-right:20px;">
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
-                <a href="?page=home" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">ホーム</a>
+                <a href="?page=home" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">ホーム</a>
               </div>
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
-                <a href="?page=regist" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">登録</a>
+                <a href="?page=regist" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">登録</a>
               </div>
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
-                <a href="?page=change" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">変更</a>
+                <a href="?page=change" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">変更</a>
               </div>
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
-                <a href="?page=use" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);">工房利用</a>
+                <a href="?page=use" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">工房利用</a>
               </div>
             </div>
           </div>
@@ -211,17 +211,17 @@
           <div style="<?php if($page != "use"){ print("display:none;"); }?>">
             <p>利用目的をクリックしてください</p>
             <div class="row" style="margin-top:20px;padding-right:20px;">
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-                <a href="#" class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);"><span class="edu">授業利用</span></a>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="edu">
+                <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="edu">授業利用</span></a>
               </div>
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-                <a href="#" class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);"><span class="cir">サークル利用</span></a>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="cir">
+                <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="cir">サークル利用</span></a>
               </div>
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-                <a href="#" class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);"><span class="exa">研究利用</span></a>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="exa">
+                <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="exa">研究利用</span></a>
               </div>
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;">
-                <a href="#" class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);"><span class="etc">その他</span></a>
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="etc">
+                <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="etc">その他</span></a>
               </div>
             </div>
           </div>
@@ -287,6 +287,16 @@
   <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay_progress.min.js"></script>
   <script src="assets/scripts/sweetalert2.min.js"></script>
   <script src="assets/scripts/iziToast.min.js" type="text/javascript"></script>
+  <?php
+    if( $page == "regist" || $page == "change" || $page == "use" ){
+      print("<script type='text/javascript' src='assets/scripts/Data_Format.js'></script>");
+    }
+  ?>
+  <?php
+    if( $page == "use" ){
+      print("<script type='text/javascript' src='assets/scripts/use.js'></script>");
+    }
+  ?>
 
   <!-- Contact Form JavaScript -->
   <!-- <script src="js/jqBootstrapValidation.js"></script>

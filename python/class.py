@@ -122,7 +122,7 @@ class WebSocket(tornado.websocket.WebSocketHandler):
                                     else :
                                         row = rows[0]
                                         res_data["data"] = { "user_name" : row["name"] , "student_number" : row["personalID"] ,
-                                        "phone_number" : row["tel"] , "email" : row["mail"] , "idm" : idm }
+                                        "phone_number" : row["tel"] , "email" : row["mail"] , "idm" : idm , "userNo" : row["userNo"] }
                                 res_data["status"] = "ok"
                                 self.send_mes( res_data , self )
                                 self.rcs620sObj.rfOff()

@@ -1,92 +1,47 @@
 $(function(){
-  user_data = new Data_Format();
-  $("#submit_btn").on("click",function(){
-    //var $btn = $(this).button('loading');
-    if( chk_form() ){
-      //$btn.button('reset');
-      $(".input_data").toggle();
-      $(".confirm_data").toggle();
-      $(".btn_group").toggle();
-      $(this).hide();
-      //$("#ConfirmModal").modal("show");
-    }else{
-      //alert("no");
-      //$btn.button('reset');
+  $("[btn]").on("click",function(){
+    if ( !$(this).find("a").attr("disabled") ){
+      var text = $(this).find("span").text();
+      var attr = $(this).attr("btn");
+      $(this).find("span").text($("[btn]:first").find("span").text());
+      $(this).attr("btn",$("[btn]:first").attr("btn"));
+      $("[btn]:first").attr("btn",attr);
+      $("[btn]:first").find("span").attr("btn");
+      $("[btn]:first").find("span").text(text);
+      $("[btn]").find("a").attr("disabled","true");
+      $("[btn]").animate({
+        "margin-left" : "0px",
+        "width" : "33.33333333%",
+        "padding" : "14px"
+      });
+      $("[btn] > a").animate({
+        "border-radius" : "50px"
+      });
+      $("[btn]:first").animate({
+        "margin-left" : "0px",
+        "width" : "100%",
+        "padding" : "40px"
+      },{
+        "complete" : function(){
+          connect_socket_use();
+        }
+      });
+      // $("[btn]:first").find("a").animate({
+      //   "border-radius" : "6px"
+      // });
+      //console.log($("[btn]")[0]);
     }
   });
-  //修正ボタンクリック
-  $("#back_btn").on("click",function(){
-    $(".input_data").toggle();
-    $(".confirm_data").toggle();
-    $(".btn_group").toggle();
-    $("#submit_btn").show();
-  })
-  //送信ボタンクリック
-  $("#send_btn").on("click",function(){
-    //$("#back_btn").hide();
-    var $btn = $(this).button('loading');
-    $.LoadingOverlaySetup({
-      color : "rgba(255,255,255,1)"
-    });
-    $(".regist_form").LoadingOverlay("show", {
-      image       : "Preloader_1.gif"
-    });
-    $(".side_menu").animate({
-      left : "-22%"
-    });
-    $.ajax({
-      type : "POST",
-      url : "data.php",
-      data : { data : user_data.createjson() },
-      success : function( res ){
-        console.log("success");
-        console.log(res);
-        setTimeout(function(){
-          $(".regist_form").LoadingOverlay("hide");
-          $(".side_menu").animate({
-            left : "0%"
-          });
-          //$(".side_menu").LoadingOverlay("hide");
-          $btn.button('reset');
-          swal({
-            title:"Success!",
-            text: '完了しました、ホームに戻ります！',
-            type:"success"
-          }).then(
-            function(){
-              window.location.href = "?page=home";
-              console.log("this is test");
-            },
-            function(dismiss){
-              window.location.href = "?page=home";
-              console.log("this is test");
-            }
-          );
-        },2000);
-      },
-      error : function( e ){
-        console.log("this is error");
-        console.log(e);
-      }
-    });
-    // $(".side_menu").LoadingOverlay("show", {
-    //   image       : "Preloader_1.gif"
-    // });
-  });
-  $("#student_number").formatter({
-    'pattern': '{{9999999999}}'
-  });
-  $("#phone_number").formatter({
-    'pattern': '{{999}}{{9999}}{{9999}}'
-  });
+})
+
+function connect_socket_use(){
   var page_info = getUrlVars(location.search);
-  if( page_info["page"] == "regist" || page_info["page"] == "change" ){
-    //$("#alert_connecting").slideToggle("normal");
+  if( page_info["page"] == "use" ){
     iziToast.info({
       id : "info_toast",
       title: 'Info',
       message: 'サーバと接続中です。しばらくお待ちください。',
-      target : "#alert_area",
+      position: 'bottomRight',
       timeout: false,
       progressBar: false,
     });
@@ -99,7 +54,7 @@ $(function(){
            console.log(JSON.stringify(getUrlVars(location.search)));
            ///getUrlVars(location.search)
            //JSON.stringify()
-           socket.send(JSON.stringify(getUrlVars(location.search)));
+           socket.send(JSON.stringify(page_info));
            //socket.send("this is test");
          }
 
@@ -115,7 +70,7 @@ $(function(){
                  iziToast.success({
                    title: 'Success',
                    message: '準備ができました！ カードをタッチしてください。',
-                   target : "#alert_area",
+                   position: 'bottomRight',
                    timeout: false,
                    progressBar: false,
                  });
@@ -143,7 +98,7 @@ $(function(){
                  iziToast.success({
                    title: 'Complete',
                    message: 'カードを確認しました！ 情報を登録してください。',
-                   target : "#alert_area",
+                   position: 'bottomRight',
                    timeout: false,
                    progressBar: false,
                  });
@@ -153,7 +108,7 @@ $(function(){
                  iziToast.error({
                    title: 'Error',
                    message: "タイムアウトです、もう一度最初からお願いします。",
-                   target : "#alert_area",
+                   position: 'bottomRight',
                    timeout: false,
                    progressBar: false,
                  });
@@ -171,7 +126,7 @@ $(function(){
                  iziToast.error({
                    title: 'Error',
                    message: "エラーです。もう一度最初からお願いします。",
-                   target : "#alert_area",
+                   position: 'bottomRight',
                    timeout: false,
                    progressBar: false,
                  });
@@ -192,7 +147,7 @@ $(function(){
                iziToast.error({
                  title: 'Error',
                  message: "エラーです。もう一度最初からお願いします。",
-                 target : "#alert_area",
+                 position: 'bottomRight',
                  timeout: false,
                  progressBar: false,
                });
@@ -215,7 +170,7 @@ $(function(){
            iziToast.error({
              title: 'Error',
              message: "エラーです。もう一度最初からお願いします。",
-             target : "#alert_area",
+             position: 'bottomRight',
              timeout: false,
              progressBar: false,
            });
@@ -231,35 +186,12 @@ $(function(){
          iziToast.error({
            title: 'Error',
            message: "エラーです。もう一度最初からお願いします。",
-           target : "#alert_area",
+           position: 'bottomRight',
            timeout: false,
            progressBar: false,
          });
          console.log("invalid socket");
        }
     },700);
-  }
-})
-
-function chk_form(){
-  var array = [];
-  if(!$("#user_name").val()) array.push("氏名を入力してください");
-  if(!$("#student_number").val()) array.push("学籍番号を入力してください");
-  if(!$("#phone_number").val()) array.push("電話番号を入力してください");
-  if(!$("#email").val()) array.push("メールアドレスを入力してください");
-
-  if( array.length > 0 ){
-    $("#error_area").html("<p>" + array.join("<br>")).show();
-    return false;
-  }else{
-    $("#error_area").html("").hide();
-    elem = $("#regist_form input");
-    label = $(".confirm_data");
-    for(i = 0 ; i < elem.length ; i++){
-      user_data.push($(elem[i]).val());
-      $(label[i]).text($(elem[i]).val());
-    }
-    console.log(user_data.createObj());
-    return true;
   }
 }
