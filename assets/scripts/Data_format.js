@@ -1,6 +1,7 @@
-Data_Format = function( user_name , student_number , phone_number , email , idm  , action ){
+Data_Format = function( user_name , student_number , phone_number , email , idm  , action  , recog ){
   this.index = 0;
   this.idm = idm;
+  this.recog = recog;
   this.action = action;
   this.user_name = user_name;
   this.student_number = student_number;
@@ -65,7 +66,8 @@ Data_Format.prototype.createjson = function(){
   return JSON.stringify({
     "action" : this.action , "idm" : this.idm ,
     "user_name" : this.user_name , "student_number" : this.student_number ,
-    "phone_number" : this.phone_number , "email" : this.email
+    "phone_number" : this.phone_number , "email" : this.email ,
+    "recog" : this.recog
   });
 }
 
@@ -73,7 +75,8 @@ Data_Format.prototype.createObj = function(){
   return {
     "action" : this.action , "idm" : this.idm ,
     "user_name" : this.user_name , "student_number" : this.student_number ,
-    "phone_number" : this.phone_number , "email" : this.email
+    "phone_number" : this.phone_number , "email" : this.email ,
+    "recog" : this.recog
   };
 }
 

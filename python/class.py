@@ -62,7 +62,7 @@ class WebSocket(tornado.websocket.WebSocketHandler):
                 res_data = {}
                 #バッファ
                 buf = None
-                if page_data["page"] == "regist" or page_data["page"] == "change":
+                if page_data["page"] == "regist" or page_data["page"] == "change" or page_data["page"] == "use" :
                     #登録の処理を実行
                     #リーダーオブジェクトの作成
                     self.rcs620sObj = rcs620s.Rcs620s()
@@ -101,9 +101,8 @@ class WebSocket(tornado.websocket.WebSocketHandler):
                                 # print("発行年月日:"+data[40:48])
                                 # print("有効期限:"+data[48:56])
                                 if page_data["page"] == "regist":
-                                    res_data["status"] = "ok"
-                                    res_data["data"] = { "user_name" : data[16:32].decode('shift-jis').encode('utf-8') ,
-                                    "student_number" : data[2:14]  , "idm" : idm }
+                                    #res_data["status"] = "ok"
+                                    res_data["data"] = { "user_name" : data[16:32].decode('shift-jis').encode('utf-8') ,"student_number" : data[2:14]  , "idm" : idm }
                                 else:
                                     dbh = pymysql.connect(
                     				         host='localhost',
@@ -118,11 +117,11 @@ class WebSocket(tornado.websocket.WebSocketHandler):
                                     stmt.execute(sql)
                                     rows = stmt.fetchall()
                                     if len(rows) == 0:
-                                        res_data["data"] = { "user_name" : "none" }
+                                        res_data["data"] = { "is_error" : True , "idm" : idm }
                                     else :
                                         row = rows[0]
                                         res_data["data"] = { "user_name" : row["name"] , "student_number" : row["personalID"] ,
-                                        "phone_number" : row["tel"] , "email" : row["mail"] , "idm" : idm , "userNo" : row["userNo"] }
+                                        "phone_number" : row["tel"] , "email" : row["mail"] , "idm" : idm , "userNo" : row["userNo"] , "is_error" : False }
                                 res_data["status"] = "ok"
                                 self.send_mes( res_data , self )
                                 self.rcs620sObj.rfOff()

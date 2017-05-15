@@ -23,7 +23,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/stylesheet/sweetalert2.min.css" rel="stylesheet">
+    <link href="assets/stylesheet/sweetalert.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/stylesheet/iziToast.min.css">
     <link rel="shortcut icon" href="key.png">
     <!-- Theme CSS -->
@@ -180,7 +180,7 @@
               </div>
             </form>
             <div class="col-md-4 col-sm-4" id="alert_area">
-              <div class="alert alert-info alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="alert_connecting">
+              <!-- <div class="alert alert-info alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="alert_connecting">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>info :</strong> サーバとの通信を確立しています。しばらくお待ちください。
               </div>
@@ -203,7 +203,7 @@
               <div class="alert alert-warning alert-dismissible col-md-12  col-sm-12" role="alert" style="display:none;" id="cancel_btn">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <strong>delete! :</strong> 全てのログを削除します。
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- RegistContent End -->
@@ -211,16 +211,16 @@
           <div style="<?php if($page != "use"){ print("display:none;"); }?>">
             <p>利用目的をクリックしてください</p>
             <div class="row" style="margin-top:20px;padding-right:20px;">
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="edu">
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="B1">
                 <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="edu">授業利用</span></a>
               </div>
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="cir">
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="B2">
                 <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="cir">サークル利用</span></a>
               </div>
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="exa">
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="B3">
                 <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="exa">研究利用</span></a>
               </div>
-              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="etc">
+              <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="B4">
                 <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="etc">その他</span></a>
               </div>
             </div>
@@ -285,7 +285,8 @@
   <script src="assets/scripts/jquery.formatter.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.loadingoverlay/latest/loadingoverlay_progress.min.js"></script>
-  <script src="assets/scripts/sweetalert2.min.js"></script>
+  <script src="assets/scripts/sweetalert.min.js"></script>
+  <!-- <script src="assets/scripts/sweetalert-dev.js"></script> -->
   <script src="assets/scripts/iziToast.min.js" type="text/javascript"></script>
   <?php
     if( $page == "regist" || $page == "change" || $page == "use" ){

@@ -1,4 +1,5 @@
 $(function(){
+  user_data = new Data_Format();
   $("[btn]").on("click",function(){
     if ( !$(this).find("a").attr("disabled") ){
       var text = $(this).find("span").text();
@@ -23,6 +24,7 @@ $(function(){
         "padding" : "40px"
       },{
         "complete" : function(){
+          user_data.recog = attr;
           connect_socket_use();
         }
       });
@@ -38,10 +40,11 @@ function connect_socket_use(){
   var page_info = getUrlVars(location.search);
   if( page_info["page"] == "use" ){
     iziToast.info({
+      class: 'toast',
       id : "info_toast",
       title: 'Info',
       message: 'サーバと接続中です。しばらくお待ちください。',
-      position: 'bottomRight',
+      position: 'topRight',
       timeout: false,
       progressBar: false,
     });
@@ -68,47 +71,103 @@ function connect_socket_use(){
                if(res_data["status"] == "ready"){
                  //$("#alert_ready").slideToggle("slow");
                  iziToast.success({
+                   class: 'toast',
                    title: 'Success',
                    message: '準備ができました！ カードをタッチしてください。',
-                   position: 'bottomRight',
+                   position: 'topRight',
                    timeout: false,
                    progressBar: false,
                  });
                }else if(res_data["status"] == "ok"){
-                 console.log(res_data);
-                 user_data.idm = res_data["data"]["idm"];
-                 user_data.action = res_data["action"];
-                 for(key in res_data["data"]){
-                   $("#"+key).val(res_data["data"][key]);
+                 //console.log(res_data);
+                 console.log(res_data["data"]["is_error"]);
+                 if( res_data["data"]["is_error"] ){
+                   //未登録
+                   swal({
+                     title: "カードが未登録です!",
+                     text: "新規にカードを登録しますか？",
+                     type: "warning",
+                     showCancelButton: true,
+                     confirmButtonColor: "#DD6B55",
+                     confirmButtonText: "登録します",
+                     cancelButtonText: "ホームに戻ります",
+                     closeOnConfirm: false,
+                     closeOnCancel: false
+                   },
+                   function(isConfirm){
+                     if (isConfirm) {
+                       window.location.href = "?page=regist";
+                     } else {
+                       window.location.href = "?page=home";
+                     }
+                   });
+
+                 }else{
+                   //利用可能
+                   user_data.idm = res_data["data"]["idm"];
+                   user_data.action = res_data["action"];
+                   iziToast.success({
+                     class: 'toast',
+                     title: 'Complete',
+                     message: 'カードを確認しました！',
+                     position: 'topRight',
+                     timeout: false,
+                     progressBar: false,
+                   });
+                   setTimeout( function(){
+                     var toast = document.getElementsByClassName("toast");
+                     var len = toast.length;
+                     for( var i = 1 ; i < len ; i++ ){
+                       iziToast.hide( {transitionOut: 'fadeOutUp'} , toast[i] );
+                     }
+                   } , 2000 );
+                   $.ajax({
+                     type : "POST",
+                     url : "data.php",
+                     data : { data : user_data.createjson() },
+                     success : function( res ){
+                       console.log(res);
+                       console.log("success");
+                       try{
+                         res_data = JSON.parse(res);
+                         if( res_data["status"] == "ok" ){
+                           swal({
+                             title: "確認しました！",
+                             text: "工房の利用が可能です！",
+                             type: "success",
+                             showCancelButton: true,
+                             confirmButtonColor: "rgb(97, 229, 76)",
+                             confirmButtonText: "ホームに戻ります",
+                             cancelButtonText: "利用目的を変更する",
+                             closeOnConfirm: false
+                           },
+                           function(isConfirm){
+                             if (isConfirm) {
+                               window.location.href = "?page=home";
+                             } else {
+                               $("[btn]").find("a").removeAttr("disabled");
+                               iziToast.destroy();
+                             }
+                           });
+                         }
+                       }catch(e){
+
+                       }
+                     },
+                     error : function( e ){
+                       console.log("this is error");
+                       console.log(e);
+                     }
+                   });
                  }
-                 //$("#user_name").attr("disabled","");
-                 //$("#student_number").attr("disabled","");
-                //  $("#user_name").val(res_data["data"]["user_name"]);
-                //  $("#student_number").val(res_data["data"]["student_number"]);
-                //  $("#alert_ok").slideToggle("slow",function(){
-                //    setTimeout(function(){
-                //      $("#cancel_btn").slideToggle("slow");
-                //      $("#cancel_btn").on("closed.bs.alert",function(){
-                //        $("#alert_area").slideToggle("slow",function(){
-                //          $(this).remove();
-                //        });
-                //      });
-                //    },500);
-                //  });
-                 iziToast.success({
-                   title: 'Complete',
-                   message: 'カードを確認しました！ 情報を登録してください。',
-                   position: 'bottomRight',
-                   timeout: false,
-                   progressBar: false,
-                 });
                  //$("#alert_connecting").hide("slow");
                  //$("#alert_ready").hide("slow");
                }else if(res_data["status"] == "timeout"){
                  iziToast.error({
+                   class: 'toast',
                    title: 'Error',
                    message: "タイムアウトです、もう一度最初からお願いします。",
-                   position: 'bottomRight',
+                   position: 'topRight',
                    timeout: false,
                    progressBar: false,
                  });
@@ -124,9 +183,10 @@ function connect_socket_use(){
                 //  });
                }else if(res_data["status"] == "error"){
                  iziToast.error({
+                   class: 'toast',
                    title: 'Error',
                    message: "エラーです。もう一度最初からお願いします。",
-                   position: 'bottomRight',
+                   position: 'topRight',
                    timeout: false,
                    progressBar: false,
                  });
@@ -145,9 +205,10 @@ function connect_socket_use(){
                console.log("this is test");
                console.log(e);
                iziToast.error({
+                 class: 'toast',
                  title: 'Error',
                  message: "エラーです。もう一度最初からお願いします。",
-                 position: 'bottomRight',
+                 position: 'topRight',
                  timeout: false,
                  progressBar: false,
                });
@@ -168,9 +229,10 @@ function connect_socket_use(){
          socket.onerror = function(){
            console.log("error");
            iziToast.error({
+             class: 'toast',
              title: 'Error',
              message: "エラーです。もう一度最初からお願いします。",
-             position: 'bottomRight',
+             position: 'topRight',
              timeout: false,
              progressBar: false,
            });
@@ -184,9 +246,10 @@ function connect_socket_use(){
        }else{
          //$("#alert_connecting").slideToggle("slow");
          iziToast.error({
+           class: 'toast',
            title: 'Error',
            message: "エラーです。もう一度最初からお願いします。",
-           position: 'bottomRight',
+           position: 'topRight',
            timeout: false,
            progressBar: false,
          });

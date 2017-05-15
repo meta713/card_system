@@ -28,7 +28,6 @@ if( $check && isset( $res_data ) && strtolower( $check ) == 'xmlhttprequest' ){
     //登録
     case "regist":
     {
-      print("regist");
       require_once 'MYDB.php';
       $pdo = db_connect();
       //get new userNo
@@ -74,7 +73,6 @@ if( $check && isset( $res_data ) && strtolower( $check ) == 'xmlhttprequest' ){
     //更新
     case "change":
     {
-      print("change");
       require_once 'MYDB.php';
       $pdo = db_connect();
       //get new userNo
@@ -155,7 +153,56 @@ if( $check && isset( $res_data ) && strtolower( $check ) == 'xmlhttprequest' ){
     //利用
     case "use":
     {
-      print("use");
+      require_once 'MYDB.php';
+      $pdo = db_connect();
+      //get new logNo
+      $sql = "select count(logNo) + 1 from ride_log2";
+      try {
+          $stmh = $pdo->prepare( $sql );
+          $stmh->execute();
+      } catch (Exception $ex) {
+          $send_data["status"] = "error1";
+          $send_data["error"] = $ex;
+          print( json_encode( $res_data ) );
+          exit;
+      }
+      $logNo = $stmh->fetchAll()[0][0];
+      //すでに登録済みか確認
+      $first_time = date( "Y-m-d 00:00:00" , time() );
+      $last_time = date( "Y-m-d 23:59:59" , time() );
+      $sql = "select logNo from ride_log2 where idm = '$data[idm]' and rideDate between '$first_time' and '$last_time'";
+      try {
+          $stmh = $pdo->prepare( $sql );
+          $stmh->execute();
+      } catch (Exception $ex) {
+          $send_data["status"] = "error1";
+          $send_data["error"] = $ex;
+          print( json_encode( $res_data ) );
+          exit;
+      }
+      $ride_info = $stmh->fetchAll();
+      if( count($ride_info) >= 1 ){
+        //更新
+        $old_logNo = $ride_info[0][0];
+        $sql = "update ride_log2 set busNo = '$data[recog]' where logNo = '$old_logNo'";
+      }else{
+        //登録
+        // current time
+        $time = date( "Y-m-d H:i:s" , time() );
+        $sql = "insert into ride_log2 values('$logNo','$data[idm]','$data[recog]','C','$time')";
+      }
+      try {
+          $stmh = $pdo->prepare( $sql );
+          $stmh->execute();
+      } catch (Exception $ex) {
+          $send_data["status"] = "error1";
+          $send_data["error"] = $ex;
+          print( json_encode( $res_data ) );
+          exit;
+      }
+      $send_data["status"] = "ok";
+      $send_data["code"] = $sql;
+      print( json_encode( $send_data ) );
       exit;
     }
     //エラー
