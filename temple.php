@@ -132,7 +132,7 @@
             <p>一覧</p>
             <div class="row" style="margin-top:20px;padding-right:20px;">
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
-                <a href="?page=home" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">ホーム</a>
+                <a href="?page=use" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">工房利用</a>
               </div>
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
                 <a href="?page=regist" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">登録</a>
@@ -141,7 +141,7 @@
                 <a href="?page=change" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">変更</a>
               </div>
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
-                <a href="?page=use" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">工房利用</a>
+                <a href="?page=home" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">ホーム</a>
               </div>
             </div>
           </div>

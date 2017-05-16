@@ -114,13 +114,14 @@ function connect_socket_use(){
                      timeout: false,
                      progressBar: false,
                    });
-                   setTimeout( function(){
-                     var toast = document.getElementsByClassName("toast");
-                     var len = toast.length;
-                     for( var i = 1 ; i < len ; i++ ){
-                       iziToast.hide( {transitionOut: 'fadeOutUp'} , toast[i] );
-                     }
-                   } , 2000 );
+                   var toast = document.getElementsByClassName("toast");
+                   var len = toast.length;
+                   for( var i = 1 ; i < len ; i++ ){
+                     iziToast.hide( {transitionOut: 'fadeOutUp'} , toast[i] );
+                   }
+                  //  setTimeout( function(){
+                  //
+                  //  } , 2000 );
                    $.ajax({
                      type : "POST",
                      url : "data.php",
