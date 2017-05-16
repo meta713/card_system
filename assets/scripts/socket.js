@@ -52,15 +52,11 @@ $(function(){
             title:"Success!",
             text: '完了しました、ホームに戻ります！',
             type:"success"
-          }).then(
-            function(){
-              window.location.href = "?page=home";
-              console.log("this is test");
-            },
-            function(dismiss){
-              window.location.href = "?page=home";
-              console.log("this is test");
-            }
+          },
+          function(dismiss){
+            window.location.href = "?page=home";
+            //console.log("this is test");
+          }
           );
         },2000);
       },
