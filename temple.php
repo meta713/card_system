@@ -129,7 +129,7 @@
           ?></h2>
           <!-- HomeContent -->
           <div style="<?php if($page != "home"){ print("display:none;"); }?>">
-            <p>一覧</p>
+            <p style="font-size: 16px;">操作を選択してください</p>
             <div class="row" style="margin-top:20px;padding-right:20px;">
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-12" style="padding:14px;">
                 <a href="?page=use" class="btn btn-default btn-lg btn-block" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;">工房利用</a>
@@ -209,7 +209,7 @@
           <!-- RegistContent End -->
           <!-- UseContent -->
           <div style="<?php if($page != "use"){ print("display:none;"); }?>">
-            <p>利用目的をクリックしてください</p>
+            <p style="font-size: 16px;">利用目的をクリックしてください</p>
             <div class="row" style="margin-top:20px;padding-right:20px;">
               <div class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1" style="padding:14px;" btn="B1">
                 <a class="btn btn-default btn-lg btn-block btn-under" style="padding:50px;font-weight:bold;color:rgb(109,109,109);border-radius:12px;"><span class="edu">授業利用</span></a>
