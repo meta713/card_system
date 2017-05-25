@@ -103,20 +103,6 @@ class WebSocket(tornado.websocket.WebSocketHandler):
                                 if page_data["page"] == "regist":
                                     #res_data["status"] = "ok"
                                     res_data["data"] = { "user_name" : data[16:32].decode('shift-jis').encode('utf-8') ,"student_number" : data[2:14]  , "idm" : idm }
-				    dbh = pymysql.connect(
-                    				         host='localhost',
-                    				         user='root',
-                    				         password='doyadoya4141',
-                    				         db='design_studio',
-                    				         charset='utf8',
-                    				         cursorclass=pymysql.cursors.DictCursor
-                    				    )
-				    stmt = dbh.cursor()
-                                    sql = "select * from kit_user2 where userNo = (select userNo from id_user2 where id_user2.stopFlg = 'A' and id_user2.idm = '" + idm + "')"
-                                    stmt.execute(sql)
-                                    rows = stmt.fetchall()
-				    if len(rows) != 0:
-				        res_data["data"]["is_error"] = True
                                 else:
                                     dbh = pymysql.connect(
                     				         host='localhost',

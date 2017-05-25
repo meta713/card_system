@@ -120,25 +120,44 @@ $(function(){
                  user_data.idm = res_data["data"]["idm"];
                  user_data.action = res_data["action"];
                  if( res_data["data"]["is_error"] ){
-                   //未登録
-                   swal({
-                     title: "カードが未登録です!",
-                     text: "新規にカードを登録しますか？",
-                     type: "warning",
-                     showCancelButton: true,
-                     confirmButtonColor: "#DD6B55",
-                     confirmButtonText: "登録します",
-                     cancelButtonText: "ホームに戻ります",
-                     closeOnConfirm: false,
-                     closeOnCancel: false
-                   },
-                   function(isConfirm){
-                     if (isConfirm) {
-                       window.location.href = "?page=regist";
-                     } else {
-                       window.location.href = "?page=home";
-                     }
-                   });
+                   if( res_data["action"] == "regist" ){
+                     //登録済み
+                     swal({
+                       title: "このカードは登録済みです！",
+                       text: "ホームに戻ります",
+                       type: "warning",
+                       confirmButtonColor: "#DD6B55",
+                       confirmButtonText: "OK",
+                       closeOnConfirm: false,
+                     },
+                     function(isConfirm){
+                       if (isConfirm) {
+                         window.location.href = "?page=home";
+                       } else {
+                         window.location.href = "?page=home";
+                       }
+                     });
+                   }else{
+                     //未登録
+                     swal({
+                       title: "カードが未登録です!",
+                       text: "新規にカードを登録しますか？",
+                       type: "warning",
+                       showCancelButton: true,
+                       confirmButtonColor: "#DD6B55",
+                       confirmButtonText: "登録します",
+                       cancelButtonText: "ホームに戻ります",
+                       closeOnConfirm: false,
+                       closeOnCancel: false
+                     },
+                     function(isConfirm){
+                       if (isConfirm) {
+                         window.location.href = "?page=regist";
+                       } else {
+                         window.location.href = "?page=home";
+                       }
+                     });
+                   }
                  }
                  for(key in res_data["data"]){
                    $("#"+key).val(res_data["data"][key]);
