@@ -59,7 +59,7 @@
     <div class="row">
       <!-- SideContent -->
       <div class="col-md-3 col-sm-4 col-xs-4 side_menu" style="min-height:625px;margin-top:55px;padding-left:40px;z-index:999;">
-        <div style="border:solid 1.5px #c9c9c9;border-radius:10px;">
+        <div style="border:solid 1px #c9c9c9;border-radius:10px;">
           <ul style="list-style:none;margin-top:0px;line-height:40px;padding:0;">
             <li style="padding:33px;font-size:14px;color:#6d6d6d;font-weight:bold;border-bottom:solid 1px #c9c9c9;text-align:center;">
               ログインユーザ <br><span style="text-align:center;"><?php if(isset($_SESSION["user_name"])){ print("工房スタッフ"); }else{ print("unknown"); } ?></span>

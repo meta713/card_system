@@ -119,9 +119,9 @@ class WebSocket(tornado.websocket.WebSocketHandler):
 				        res_data["data"]["is_error"] = True
                                 else:
                                     dbh = pymysql.connect(
-                    				         host='localhost',
-                    				         user='root',
-                    				         password='doyadoya4141',
+                    				         host='10.0.1.51',
+                    				         user='design',
+                    				         password='ds_master',
                     				         db='design_studio',
                     				         charset='utf8',
                     				         cursorclass=pymysql.cursors.DictCursor
